@@ -1,0 +1,26 @@
+<div class="card" style="width: 18rem">
+  <img [src]="userInfo.thumbnail" class="card-img-top" alt="..." />
+  <div class="card-body">
+    <h5 class="card-title">Username: {{userInfo.name}}</h5>
+    <p class="card-text" #elem>
+      Description: {{ userInfo.description }}
+    </p>
+    <div>
+        <h6>Address</h6>
+        <p class="card-text">
+            City: {{ userInfo.address.city }}
+          </p>
+          <p class="card-text">
+            Street: {{ userInfo.address.street }}
+          </p>
+          <p class="card-text">
+            Zip Code: {{ userInfo.address.zip }}
+          </p>
+    </div>
+    <input type="text" [(ngModel)]="userInput">
+    <button  type="button" (click)="changeCity()">Change City</button>
+
+
+    <button class="btn btn-primary" (click)="updateMe()">Update User</button>
+  </div>
+</div>

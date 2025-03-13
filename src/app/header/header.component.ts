@@ -6,28 +6,26 @@ import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit,
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent
-  implements OnInit,
-  AfterViewInit,
-  OnChanges {
+  {
 
   sampleClick: boolean = false;
 
-  constructor() {
-    console.log('Constructor')
-  }
+  // constructor() {
+  //   console.log('Constructor')
+  // }
 
-  ngOnInit(): void {
+  // ngOnInit(): void {
   
-    console.log('HEADER ngOnInit Called')
-  }
+  //   console.log('HEADER ngOnInit Called')
+  // }
 
-  ngAfterViewInit(): void {
-    console.log('HEADER ngAfterViewInit Called')
+  // ngAfterViewInit(): void {
+  //   console.log('HEADER ngAfterViewInit Called')
 
 
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('CHANGED CALLED')
+  // }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   console.log('CHANGED CALLED')
 
-  }
+  // }
 }
