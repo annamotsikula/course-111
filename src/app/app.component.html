@@ -1,8 +1,12 @@
-<app-header/>
+<app-header />
 
-<div class="container" style="height: 600px;">
-       <app-user-dashboard />
+<div class="container" style="height: 600px">
+       <div class="product">
+              @for (product of productList; track product.id) {
+                   <app-product [product]="product" class="product" />
+              }
+
+       </div>
 </div>
-
 
 <app-footer />

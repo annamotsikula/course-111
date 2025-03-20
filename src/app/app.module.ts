@@ -6,7 +6,10 @@ import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-import { ChildFunctionComponent } from './core/general-functions/singleFunction/child-function/child-function.component';
+import { ProductComponent } from './product/product.component';
+import { CommonModule } from '@angular/common';
+import { OnsaleDirective } from './core/directives/onsale.directive';
+
 
 @NgModule({
   declarations: [
@@ -15,7 +18,8 @@ import { ChildFunctionComponent } from './core/general-functions/singleFunction/
     FooterComponent,
     ProfileComponent,
     UserDashboardComponent,
-    ChildFunctionComponent
+    ProductComponent,
+    OnsaleDirective,
   ],
   imports: [
     BrowserModule,

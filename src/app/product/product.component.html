@@ -1,0 +1,82 @@
+<div class="col-md-12" >
+  <div class="card shadow-0 border rounded-3 mb-4">
+    <div class="card-body" [appOnsale]="!!product.discountedPrice">
+      <div class="row">
+        <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+          <div class="bg-image hover-zoom ripple rounded ripple-surface">
+            <img [src]="product.thumbnail" class="w-100" />
+            <a href="#!">
+              <div class="hover-overlay">
+                <div
+                  class="mask"
+                  style="background-color: rgba(253, 253, 253, 0.15)"
+                ></div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6 col-xl-6">
+          <h5>{{ product.title }}</h5>
+          <div class="d-flex flex-row">
+            <div class="mb-1 me-2">
+              @for (icon of stars; track $index) {
+              <!-- {{ $odd }} -->
+
+              <!-- {{ $even }} -->
+
+              <!-- [ngClass]="{'text-danger': product.rating < 2,
+              'text-success': product.rating > 4.5
+              }" -->
+              <!--     
+                [class.text-danger]="product.rating < 2"
+                [class.text-success]="product.rating > 4" -->
+              <i
+                class="bi bi-star-fill"
+                [ngClass]="product.rating > 4 ? 'text-success' : 'text-danger'"
+                [ngStyle]="{'backgroundColor' : product.rating > 4 ? 'red' : 'purple' }"
+                (click)="addReview()"
+              ></i>
+
+              <!-- @if($last) {
+                        <i class="bi bi-star-fill text-danger" (click)="addReview()"></i>
+                    } -->
+
+              <!-- {{$first}} -->
+              }
+            </div>
+            <span>{{ product.rating }}</span>
+            @if(product.rating > 4) {
+                <span class="text-success ms-2">This product has good reviews!</span>
+            }
+          </div>
+          <div class="mb-2 text-muted small" [ngSwitch]="product.category">
+            <span *ngSwitchCase="'beauty'">
+              <div>Skincare Products</div>
+            </span>
+            <span *ngSwitchCase="'gadget'"> Mobile and Laptop </span>
+            <span class="text-primary"> • </span>
+          </div>
+          <p class="text-truncate mb-4 mb-md-0">
+            {{ product.description }}
+          </p>
+        </div>
+        <div
+          class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start"
+        >
+          <div class="d-flex flex-row align-items-center mb-1">
+            <h4 class="mb-1 me-1">{{ product.discountedPrice ? product.discountedPrice : product.price }}</h4>
+            @if(product.discountedPrice) {
+                <span class="text-danger"><s>{{product.price}}</s></span>
+            }
+          </div>
+          <h6 class="text-success">Free shipping</h6>
+          <div class="d-flex flex-column mt-4">
+            <button class="btn btn-outline-primary btn-sm mt-2" type="button">
+              Add to wishlist
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
