@@ -1,8 +1,36 @@
-<div class="product">
- Counter:  {{ service.coutner }}
-  @for (product of productList; track product.id) {
-  <app-product [product]="product" class="product" />
+<div class="section">
+  <button (click)="toggleForm = !toggleForm" class="btn warning">+ Add new product</button>
+  @if(toggleForm) {
+  <div class="form">
+    <div class="input-block">
+      <span>Title</span>
+      <input type="text" [(ngModel)]="inputData.title" class="form-input" />
+    </div>
+    <div class="input-block">
+      <span>Price</span>
+      <input type="number" [(ngModel)]="inputData.price" />
+    </div>
+    <div class="input-block">
+      <span>Category</span>
+      <select [(ngModel)]="inputData.category" >
+        @for (opt of cateogryList ; track $index) {
+          <option [value]="opt.category" [disabled]="opt.disabled">{{ opt.name }}</option>
+        }
+      </select>
+    </div>
+    <button class="btn ok submit" (click)="submit()">Submit</button>
+  </div>
   }
+</div>
 
-  <button (click)=" service.increaseCounter()">Click me to increase coutner</button>
+<div class="product-list">
+  @for (product of service.getProducts(); track product.id) {
+  <app-product [product]="product" class="product" (removeItem)="deleteProductgById(product)" />
+  } @empty {
+    <p class="alert alert-warning">No Products to display</p>
+
+  }
+  <!-- @if(service.getProducts().length === 0) {
+    <p class="alert alert-warning">No Products to display</p>
+  } -->
 </div>

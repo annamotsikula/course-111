@@ -30,7 +30,7 @@
               ></i>
               }
             </div>
-            <span>{{ product.rating }} {{service.coutner}}</span>
+            <span>{{ product.rating }}</span>
             @if(product.rating > 4) {
             <span class="text-success ms-2"
               >This product has good reviews!</span
@@ -45,29 +45,37 @@
             <span class="text-primary"> • </span>
           </div>
           <p class="mb-4 mb-md-0">
-            {{ product.description | truncate: 12 }}
+            {{ product.description | truncate : 12 }}
           </p>
         </div>
         <div
           class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start"
         >
+        <div class="remove-product">
+          <button (click)="removeItem.emit()" class="btn">
+            <i class="bi bi-trash" ></i>
+          </button>
+        </div>
           <div class="d-flex flex-row align-items-center mb-1">
             <h4 class="mb-1 me-1">
               {{
-               ( product.discountedPrice
+                (product.discountedPrice
                   ? product.discountedPrice
-                  : product.price) | number: "1.0-2" | currency
+                  : product.price
+                )
+                  | number : "1.0-2"
+                  | currency
               }}
             </h4>
             @if(product.discountedPrice) {
             <span class="text-danger"
-              ><s>{{ product.price | number: "1.0-2" | currency }}</s></span
+              ><s>{{ product.price | number : "1.0-2" | currency }}</s></span
             >
             }
           </div>
           <h6 class="text-success">Free shipping</h6>
           <div class="d-flex flex-column mt-4">
-            <button class="btn btn-outline-primary btn-sm mt-2" type="button" >
+            <button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="updateCart()">
               Add to wishlist
             </button>
           </div>

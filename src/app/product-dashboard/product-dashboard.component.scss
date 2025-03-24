@@ -1,0 +1,42 @@
+.product-list {
+    padding: .5rem 2rem;
+}
+.form {
+    color: blue
+}
+
+.section {
+    border: 1px solid grey;
+    border-radius: 8px;
+    padding: .3rem 1rem;
+    .form {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 70%;
+        .input-block {
+            margin-left: 0.5rem;
+        }
+    }
+    button {
+        &.warning {
+            background-color: orange;
+        }
+        &.fail {
+            background-color: red;
+        }
+        &.ok {
+            background-color: green;
+        }
+        &.submit {
+            margin-left: .5rem;
+            color: white
+        }
+    }
+}
+
+
+

@@ -1,42 +1,82 @@
-import { Component } from '@angular/core';
-import { Product } from '../core/interfaces/product.interface';
-import { AppService } from '../core/services/app.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { Category, Product } from '../core/interfaces/product.interface';
+import { ProductService } from '../core/services/product.service';
 
 @Component({
   selector: 'app-product-dashboard',
   templateUrl: './product-dashboard.component.html',
   styleUrl: './product-dashboard.component.scss',
-  providers: [AppService]
 })
-export class ProductDashboardComponent {
+export class ProductDashboardComponent implements OnInit {
+  service = inject(ProductService);
 
-  productList: Product[] = [
+  productList: Product[] = [];
+  toggleForm: boolean = false;
+
+  inputData = {
+    title: "",
+    price: null,
+    category: ""
+  }
+  cateogryList: {name: string, category: Category | "", disabled?: boolean}[] = [
     {
-      id: 1,
-      title: "Essence Mascara Lash Princess",
-      description: "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
-      category: "beauty",
-      price: 9.99,
-      rating: 4.94,
-      stock: 5,
-      thumbnail: "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
+      name: 'Choose Category',
+      category: "",
+      disabled: true
     },
     {
-      id: 13,
-      title: "Bedside Table African Cherry",
-      description: "The Bedside Table in African Cherry is a stylish and functional addition to your bedroom, providing convenient storage space and a touch of elegance.",
-      category: "furniture",
-      price: 299.99,
-      discountPercentage: 9.58,
-      rating: 4.48,
-      stock: 16,
-      thumbnail: "https://cdn.dummyjson.com/products/images/furniture/Bedside%20Table%20African%20Cherry/thumbnail.png"
+      name: "Beauty & Skincare",
+      category: "beauty"
     },
+    {
+      name: "Indoor & Exterior",
+      category: "furniture"
+    },
+    {
+      name: "Electonic Devices",
+      category: "gadget"
+    },
+    {
+      name: "Market Goods",
+      category: "groceries"
+    }
   ]
 
+  ngOnInit() {
+    
 
-  constructor(public service: AppService) {
+
+
+
+
+  }
+
+  deleteProductgById(product: Product) {
+    console.log('Click detected', product)
+    this.service.removeProduct(product.id)
+  }
+
+  submit() {
+    console.log(this.inputData)
+    const { title, price, category } = this.inputData;
+    if(title === "" || price == null || category === "") {
+      return;
+    }
+    const newProduct = {
+      title,
+      price,
+      category: category as Category,
+      img: "https://iplus.com.ge/images/detailed/9/MT233.jpeg"
+    }
+    
+    this.service.addProduct(newProduct);
+    this.inputData.title = ""
+    this.inputData.price = null;
+    this.inputData.category = "";
+    this.toggleForm = false
+
 
   }
 
 }
+

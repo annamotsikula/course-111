@@ -1,6 +1,6 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Product } from '../core/interfaces/product.interface';
-import { AppService } from '../core/services/app.service';
+import { ProductService } from '../core/services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -10,23 +10,25 @@ import { AppService } from '../core/services/app.service';
 export class ProductComponent {
 
   @Input({ required: true }) product!: Product
+  @Output() removeItem: EventEmitter<void> = new EventEmitter()
 
   stars = new Array(5)
 
-  constructor(public service: AppService) {
+  constructor(private _productService: ProductService) {
   }
 
   ngOnInit() {
     const { discountPercentage, price } = this.product
     this.product.discountedPrice = discountPercentage ? price - (price * discountPercentage / 100) : undefined
-    console.log(this.product)
-
   }
 
   addReview() {
     console.log('Clicked')
     this.stars.push(null)
   }
-
+  updateCart() {
+    console.log('Button Clicked')
+    this._productService.cartUpdated.next(1)
+  }
 
 }

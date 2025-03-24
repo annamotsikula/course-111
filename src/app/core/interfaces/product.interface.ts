@@ -8,8 +8,11 @@ export interface Product extends Partial<MoreProps> {
     discountedPrice?: number,
     rating: number,
     stock: number,
-    thumbnail: string
+    thumbnail: string,
 }
+
+
+
 
 interface MoreProps {
     tags: string[];
@@ -26,7 +29,7 @@ interface MoreProps {
     meta: MetaData;
     images: string[];
 }
-type Category = 'beauty' | 'gadget' | "furniture"
+export type Category = 'beauty' | 'gadget' | "furniture" | "groceries"
 
 interface Dimensions {
     width: number;
