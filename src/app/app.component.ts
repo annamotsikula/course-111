@@ -1,41 +1,58 @@
 import { Component } from "@angular/core";
-import { Student } from "./core/interfaces/app.interface";
-import { Product } from "./core/interfaces/product.interface";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+
 })
 export class AppComponent {
-  title: string = "My First Angular App";
+  price = 3.123935453453;
 
+  obj = {
+    name: "Angular",
+    version: "18"
+  }
 
-  productList: Product[] = [
-    {
-      id: 1,
-      title: "Essence Mascara Lash Princess",
-      description: "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
-      category: "beauty",
-      price: 9.99,
-      rating: 4.94,
-      stock: 5,
-      thumbnail: "https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png",
-    },
-    {
-      id: 13,
-      title: "Bedside Table African Cherry",
-      description: "The Bedside Table in African Cherry is a stylish and functional addition to your bedroom, providing convenient storage space and a touch of elegance.",
-      category: "furniture",
-      price: 299.99,
-      discountPercentage: 9.58,
-      rating: 4.48,
-      stock: 16,
-      thumbnail: "https://cdn.dummyjson.com/products/images/furniture/Bedside%20Table%20African%20Cherry/thumbnail.png"
-    },
-  ]
+  name: string = "This iS STRing"
 
+  today = new Date();
 
+  constructor() {
 
-
+  }
 } 
+
+/* 
+
+  <h2>Pipes</h2>
+       <p>Original Value: {{price}}</p>
+       <p>Number Pipe: {{price | number: '0.0-0' }}</p>
+       <p>Number Pipe: {{price | number: '1.3-5' }}</p>
+       <p>Original Value: {{price | percent }}</p>
+       <p>Original Value: {{price | currency: 'RUB' }}</p>
+
+       <!-- JSON PIPE -->
+       <h2>JSON Pipe</h2>
+
+       <p>{{obj | json}}</p>
+       <!-- String Pipe -->
+       <h2>String Pipe</h2>
+       <p>Original value: {{name}}</p>
+       <p>{{name | uppercase}}</p>
+       <p>{{name | lowercase}}</p>
+       <p>{{name | titlecase}}</p>
+       <p>{{name | slice: 4}}</p>
+       <p>{{name | slice: 5 : 10}}</p>
+       <br>
+       <h2>KeyValue Pipe</h2>
+       @for (item of obj | keyvalue; track item.key) {
+        <div>{{ item.key }}:{{ item.value }}</div>
+      }
+       <!-- Date Pipe -->
+
+       <p>{{today}}</p>
+       <p>{{today | date: "short"}}</p>
+       <p>{{today | date: "medium"}}</p>
+       <p>{{today | date: "long"}}</p>
+       <p>{{today | date: "yyyy"}}</p>*/

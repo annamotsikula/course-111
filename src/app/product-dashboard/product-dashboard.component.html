@@ -1,0 +1,8 @@
+<div class="product">
+ Counter:  {{ service.coutner }}
+  @for (product of productList; track product.id) {
+  <app-product [product]="product" class="product" />
+  }
+
+  <button (click)=" service.increaseCounter()">Click me to increase coutner</button>
+</div>

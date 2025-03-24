@@ -2,14 +2,14 @@
   <app-header />
   <main class="flex-shrink-0">
     <div class="container">
-      <div class="product">
-        @for (product of productList; track product.id) {
-        <app-product [product]="product" class="product" />
-        }
-      </div>
+
+      <app-product-dashboard />
+
     </div>
   </main>
   <div class="mt-auto">
     <app-footer />
   </div>
 </div>
+
+

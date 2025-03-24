@@ -6,6 +6,8 @@ import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component';
 import { OnsaleDirective } from './core/directives/onsale.directive';
+import { ProductDashboardComponent } from './product-dashboard/product-dashboard.component';
+import { TruncatePipe } from './core/pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -14,12 +16,13 @@ import { OnsaleDirective } from './core/directives/onsale.directive';
     FooterComponent,
     ProductComponent,
     OnsaleDirective,
+    ProductDashboardComponent,
+    TruncatePipe,
   ],
   imports: [
     BrowserModule,
     FormsModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

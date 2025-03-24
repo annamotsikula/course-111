@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Product } from '../core/interfaces/product.interface';
+import { AppService } from '../core/services/app.service';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrl: './product.component.scss'
+  styleUrl: './product.component.scss',
 })
 export class ProductComponent {
 
@@ -12,7 +13,7 @@ export class ProductComponent {
 
   stars = new Array(5)
 
-  constructor() {
+  constructor(public service: AppService) {
   }
 
   ngOnInit() {
