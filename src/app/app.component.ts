@@ -8,21 +8,26 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   price = 3.123935453453;
+  list = [
+    {
+      isCompleted: false,
+      title: 'Do your homework'
+    },
+    {
+      isCompleted: false,
+      title: 'Go to your homework'
+    }
+  ]
+str = ['123', '2234', 'safasf']
 
-  obj = {
-    name: "Angular",
-    version: "18"
-  }
 
-  name: string = "This iS STRing"
-
-  today = new Date();
-
-  constructor() {
-    
-
-  }
+finish(index: number) {
+  this.str[index]
+}
 } 
+
+
+
 
 /* 
 

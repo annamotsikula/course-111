@@ -23,11 +23,12 @@
               <i
                 class="bi bi-star-fill"
                 [ngClass]="product.rating > 4 ? 'text-success' : 'text-danger'"
-                [ngStyle]="{
-                  backgroundColor: product.rating > 4 ? 'red' : 'purple'
-                }"
+             
                 (click)="addReview()"
               ></i>
+              <!--    [ngStyle]="{
+                  backgroundColor: product.rating > 4 ? 'red' : 'purple'
+                }" -->
               }
             </div>
             <span>{{ product.rating }}</span>
@@ -77,6 +78,9 @@
           <div class="d-flex flex-column mt-4">
             <button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="updateCart()">
               Add to wishlist
+            </button>
+            <button class="btn btn-outline-primary btn-sm mt-2" type="button" (click)="gotoDetails()">
+              See More Details
             </button>
           </div>
         </div>

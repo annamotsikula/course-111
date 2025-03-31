@@ -1,6 +1,7 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Product } from '../core/interfaces/product.interface';
 import { ProductService } from '../core/services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -14,7 +15,7 @@ export class ProductComponent {
 
   stars = new Array(5)
 
-  constructor(private _productService: ProductService) {
+  constructor(private _productService: ProductService, private _router: Router) {
   }
 
   ngOnInit() {
@@ -29,6 +30,11 @@ export class ProductComponent {
   updateCart() {
     console.log('Button Clicked')
     this._productService.cartUpdated.next(1)
+  }
+
+  gotoDetails() {
+    this._router.navigate(['/product-dashboard', this.product.id])
+
   }
 
 }

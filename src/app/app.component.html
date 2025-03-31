@@ -1,15 +1,8 @@
-<div class="d-flex flex-column h-100">
-  <app-header />
-  <main class="flex-shrink-0">
-    <div class="container">
+<!-- <router-outlet></router-outlet> -->
 
-      <app-product-dashboard />
+@for (todo of str; track $index) {
+    <p 
+    (click)="finish($index)">
+</p>
 
-    </div>
-  </main>
-  <div class="mt-auto">
-    <app-footer />
-  </div>
-</div>
-
-
+}

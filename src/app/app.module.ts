@@ -4,24 +4,26 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
-import { ProductComponent } from './product/product.component';
-import { OnsaleDirective } from './core/directives/onsale.directive';
-import { ProductDashboardComponent } from './product-dashboard/product-dashboard.component';
-import { TruncatePipe } from './core/pipes/truncate.pipe';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { AppRoutingModule } from './app-routing.module';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { MainComponent } from './main/main.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ProductComponent,
-    OnsaleDirective,
-    ProductDashboardComponent,
-    TruncatePipe,
+    WishlistComponent,
+    NotFoundComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })
