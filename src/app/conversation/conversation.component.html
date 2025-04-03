@@ -1,0 +1,11 @@
+<h5 class="title">Conversation (Input-Output Only)</h5>
+<div class="d-flex justify-content-around">
+  @for (user of participants; track user.id) {
+  <app-chat
+    [name]="user.name"
+    [message]="user.currentMessage"
+    [img]="user.img"
+    (receive)="receiveMessage($event, user.id)"
+  />
+  }
+</div>
