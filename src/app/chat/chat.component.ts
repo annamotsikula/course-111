@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrl: './chat.component.scss'
+  styleUrl: './chat.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatComponent {
   @Input({ required: true, alias: 'message' }) incomingMessage = '';
@@ -13,10 +14,13 @@ export class ChatComponent {
 
   outgoingMessage: string = '';
 
+  @ViewChild('messageList') private messageList: ElementRef<HTMLUListElement> | undefined;
+
+
   ngOnChanges(changes: SimpleChanges) {
     const incoming = changes['incomingMessage']
     if (incoming && !incoming.firstChange) {
-      this.chatHistory.push({ type: 'INCOMING', text: incoming.currentValue })
+      this.chatHistory.push({ type: 'INCOMING', text: incoming.currentValue });
     }
 
   }
@@ -27,10 +31,28 @@ export class ChatComponent {
   }[] = []
 
   sendMessage() {
-    if (this.outgoingMessage.length) {
+    if(/^\s+$/.test(this.outgoingMessage)) {
+      this.outgoingMessage = "";
+      return;
+    }
+    if (this.outgoingMessage.length ) {
       this.send.emit(this.outgoingMessage);
-      this.chatHistory.push({ type: 'OUTGOING', text: this.outgoingMessage })
+      this.scrollToBottom();
+      this.chatHistory.push({ type: 'OUTGOING', text: this.outgoingMessage });
       this.outgoingMessage = ""
+    }
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  private scrollToBottom() {
+    const element = this.messageList?.nativeElement;
+    if (element) {
+      if (element.scrollHeight > element.clientHeight) {
+        element.scrollTop = element.scrollHeight;
+      }
     }
   }
 

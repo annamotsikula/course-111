@@ -1,8 +1,8 @@
 <div class="content">
   <div class="card">
     <div class="card-header">Chat</div>
-    <div class="card-body height3">
-      <ul class="chat-list">
+    <div class="card-body">
+      <ul class="chat-list" #messageList>
         @for (chat of chatHistory ; track $index) {
             <li [ngClass]="chat.type === 'INCOMING' ? 'in' : 'out'">
                 <div class="chat-img">
@@ -19,15 +19,15 @@
             Conversation has not started
         }
       </ul>
-    </div>
-    <div class="form-outline p-2">
-      <textarea
-        class="form-control bg-body-tertiary"
-        placeholder="Type your message here..."
-        rows="4"
-        [(ngModel)]="outgoingMessage"
-        (keyup.enter)="sendMessage()"
-      > </textarea>
+      <div class="form-outline p-2">
+        <input
+          class="form-control bg-body-tertiary"
+          placeholder="Type your message here..."
+          rows="4"
+          [(ngModel)]="outgoingMessage"
+          (keyup.enter)="sendMessage()"
+        >
+      </div>
     </div>
   </div>
 </div>
