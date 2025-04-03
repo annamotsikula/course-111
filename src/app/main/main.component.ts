@@ -10,8 +10,8 @@ export class MainComponent {
 router = inject(Router)
 
 constructor() {
-  this.router.events.subscribe((res) => {
-    console.log(res)
-  })
+  // this.router.events.subscribe((res) => {
+  //   console.log(res)
+  // })
 }
 }

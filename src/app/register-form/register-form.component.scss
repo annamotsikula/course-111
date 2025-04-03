@@ -1,0 +1,20 @@
+.fg {
+    background-color: rgba(206, 94, 94, 0.392);
+}
+.fc {
+    background-color: rgba(176, 210, 23, 0.392);
+
+}
+.fa {
+    background-color: rgba(23, 85, 210, 0.392);
+
+}
+
+.fg, .fc, .fa {
+    padding: 1rem;
+
+}
+.error {
+    color: red;
+    font-style: italic;
+}
