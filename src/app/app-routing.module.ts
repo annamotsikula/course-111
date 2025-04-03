@@ -15,7 +15,7 @@ const routes: Routes = [
         component: RegisterFormComponent
       },
       {
-        path: 'product-dashboard',
+        path: '',
         loadChildren: () => import("./core/modules/products.module").then(m => m.ProductsModule)
       },
       {

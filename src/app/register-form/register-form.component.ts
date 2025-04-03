@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { RegisterForm } from './form.type';
+import { geoPhoneNumber } from '../core/validators/validators';
 
 @Component({
   selector: 'app-register-form',
@@ -15,7 +16,7 @@ export class RegisterFormComponent {
 
   // firstname
   registerForm: FormGroup<RegisterForm> = new FormGroup<RegisterForm>({
-    emailAddress: new FormControl(null, [Validators.required, Validators.email]),
+    emailAddress: new FormControl('test@test.com', {validators: [Validators.required, Validators.email], nonNullable: true}),
     fullName: new FormControl(null, [Validators.minLength(15)]),
     address: new FormGroup({
       street: new FormControl(),
@@ -26,14 +27,15 @@ export class RegisterFormComponent {
       new FormControl(false, [Validators.requiredTrue]),
       new FormControl(false),
       new FormControl(false)
-    ])
+    ]),
+    restrictedUser: new FormControl({value: false, disabled: true}, { nonNullable: true})
   }
 );
 
   singleControl = new FormControl()
   constructor() {
-    console.log(this.registerForm)
-    // console.log(this.skillsArray.controls)
+  console.log(this.registerForm)
+   
   }
 
   get skillsArray() {
@@ -41,17 +43,52 @@ export class RegisterFormComponent {
   }
 
   register() {
-    if(this.registerForm.valid) {
-      console.log(this.registerForm)
+    // if(this.registerForm.valid) {
+      console.log(this.registerForm.value)
+      console.log(this.registerForm.getRawValue().restrictedUser)
 
-    } else {
+    // } else {
       console.error('This form is not valid')
-    }
+    // }
 
   }
 
-  log() {
-    console.log(this.skillsArray)
+  addNewControl(name: string, validators: ValidatorFn | ValidatorFn[]) {
+    const newControl = new FormControl(null);
+    newControl.addValidators(validators);
+    //@ts-ignore
+    this.registerForm.addControl(name, newControl);
+    console.log(this.registerForm)
+  }
+
+  addPhoneNumber() {
+    this.addNewControl('phoneNumber', [Validators.required, Validators.minLength(9), geoPhoneNumber]);
+    this.addNewControl('countryCode', [Validators.required]);
+
+    this.listenToPhoneNumberChanges();
+  }
+
+  listenToPhoneNumberChanges() {
+    this.registerForm.controls['countryCode']?.valueChanges.subscribe(res => {
+      console.log(res)
+      if(res === '+995') {
+        const phoneControl =this.registerForm.controls.phoneNumber;
+        if(phoneControl) {
+          phoneControl.setValue('+995123456');
+          this.registerForm.controls.address.patchValue({city: 'Tbilisi'})
+          // this.registerForm.controls.address.setValue({city: 'Tbilisi', country: '', street: 'stree 123'})
+          phoneControl.setErrors({usaPhoneNumber: true});
+          phoneControl.updateValueAndValidity();
+        }
+        
+        console.log(this.registerForm)
+
+      }
+    })
+  }
+
+  resetForm() {
+    this.registerForm.reset();
   }
 
 }

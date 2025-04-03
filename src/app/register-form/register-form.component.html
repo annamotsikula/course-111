@@ -1,60 +1,102 @@
 <form [formGroup]="registerForm" (submit)="register()">
-    <div class="fg">
-        <div class="mb-3 fc">
-            <label class="form-label">Email address</label>
-            <input type="email" class="form-control" placeholder="name@example.com" formControlName="emailAddress">
-        </div>
-        @if(registerForm.controls.emailAddress.touched && registerForm.controls.emailAddress.invalid  ) {
-            <div class="error">
-                @if(registerForm.controls.emailAddress.errors?.['required']) {
-                    <span>This field is required</span>
-                }
-                @if(registerForm.controls.emailAddress.errors?.['email']) {
-                    <span>This format is not valid</span>
-                }
-            </div>
-        }
-    
-        <div class="mb-3 fc">
-            <label class="form-label">FirstName & LastName</label>
-            <input type="text" class="form-control" formControlName="fullName">
-        </div>
-
-        <div class="fg" formGroupName="address">
-            <div class="mb-3 fc">
-                <label class="form-label">Street Number</label>
-                <input type="text" class="form-control" formControlName="street">
-            </div>
-        
-            <div class="mb-3 fc">
-                <label class="form-label">City/Town</label>
-                <input type="text" class="form-control" formControlName="city">
-            </div>
-            <div class="mb-3 fc">
-                <label class="form-label">Country</label>
-                <select class="form-control" formControlName="country">
-                    <option value="">Choose Country</option>
-                </select>
-            </div>
-    
-        </div>
-
-        <div class="fa" formArrayName="skills">
-            <span>Choose your skills</span>
-            @for (list of skillsCheckBox; track $index) {
-                    <div class="mb-3 fc">
-                        <input type="checkbox" class="form-check-label me-2" [formControlName]="$index">
-                        <label class="form-label">{{list}}</label>
-                    </div>
-                }
-        </div>
-
-
-
-
+    <button type="button" (click)="resetForm()">Reset</button>
+  <div class="fg">
+    <div class="mb-3 fc">
+      <label class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        placeholder="name@example.com"
+        formControlName="emailAddress"
+      />
     </div>
-    <button class="btn btn-success mt-2" type="submit">Submit</button>
-    <button class="btn btn-success mt-2" type="button" (click)="log()" >Log Only Skills</button>
+    @if(registerForm.controls.emailAddress.touched &&
+    registerForm.controls.emailAddress.invalid ) {
+    <div class="error">
+      @if(registerForm.controls.emailAddress.errors?.['required']) {
+      <span>This field is required</span>
+      } @if(registerForm.controls.emailAddress.errors?.['email']) {
+      <span>This format is not valid</span>
+      }
+    </div>
+    }
+ 
+    <div class="mb-3 fc">
+      <label class="form-label">FirstName & LastName</label>
+      <input type="text" class="form-control" formControlName="fullName" />
+    </div>
 
+    <div class="fg" formGroupName="address">
+      <div class="mb-3 fc">
+        <label class="form-label">Street Number</label>
+        <input type="text" class="form-control" formControlName="street" />
+      </div>
+
+      <div class="mb-3 fc">
+        <label class="form-label">City/Town</label>
+        <input type="text" class="form-control" formControlName="city" />
+      </div>
+      <div class="mb-3 fc">
+        <label class="form-label">Country</label>
+        <select class="form-control" formControlName="country">
+          <option value="">Choose Country</option>
+          <option value="georgia">Georgia</option>
+          <option value="USA">USA</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-3 fc">
+        <input type="checkbox" class="form-check-label me-2" formControlName="restrictedUser" />
+        <label class="form-label">I have restricted documents for this website:</label>
+      </div>
+
+    <div class="fa" formArrayName="skills">
+      <span>Choose your skills</span>
+      @for (list of skillsCheckBox; track $index) {
+      <div class="mb-3 fc">
+        <input
+          type="checkbox"
+          class="form-check-label me-2"
+          [formControlName]="$index"
+        />
+        <label class="form-label">{{ list }}</label>
+      </div>
+      }
+    </div>
+    @if(registerForm.controls.phoneNumber) {
+    <div class="mb-3 fc">
+      <label class="form-label">Street Number</label>
+      <input type="text" class="form-control" formControlName="phoneNumber" />
+      <select formControlName="countryCode">
+        <option value="null" selected disabled>Choose country</option>
+        <option value="+995">Georgia</option>
+        <option value="+1">USA</option>
+      </select>
+    </div>
+    <div class="error">
+      @if(registerForm.controls.phoneNumber.errors; as errors) {
+        {{ errors | json }}
+        @if(errors["minlength"]) {
+            <span
+              >Please provide minimum
+              {{ errors["minlength"]?.requiredLength }} characters.
+             </span>
+        }
+        @if(errors["georgianNumber"]) {
+           <span>Georgian number is restricted</span>
+        }
+      }
+    </div>
+    }
+  </div>
+  <button class="btn btn-success mt-2" type="submit">Submit</button>
+
+  <button
+    class="btn btn-success mt-2 ms-2"
+    type="button"
+    (click)="addPhoneNumber()"
+  >
+    Add Phone Number
+  </button>
 </form>
-
