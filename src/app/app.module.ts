@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MainComponent } from './main/main.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -26,7 +27,8 @@ import { RegisterFormComponent } from './register-form/register-form.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })

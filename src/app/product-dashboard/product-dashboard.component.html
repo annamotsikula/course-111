@@ -24,7 +24,8 @@
 </div>
 
 <div class="product-list">
-  @for (product of service.getProducts(); track product.id) {
+
+  @for (product of productList; track product.id) {
   <app-product [product]="product" class="product" (removeItem)="deleteProductgById(product)" />
   } @empty {
     <p class="alert alert-warning">No Products to display</p>

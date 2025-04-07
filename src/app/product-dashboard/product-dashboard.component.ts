@@ -43,9 +43,8 @@ export class ProductDashboardComponent implements OnInit {
   ]
 
   ngOnInit() {
+    this.service.fetchAllproduct().subscribe(response => this.productList = response)
     
-
-
 
 
 

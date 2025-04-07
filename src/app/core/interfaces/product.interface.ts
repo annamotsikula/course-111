@@ -11,9 +11,6 @@ export interface Product extends Partial<MoreProps> {
     thumbnail: string,
 }
 
-
-
-
 interface MoreProps {
     tags: string[];
     brand: string;

@@ -65,12 +65,11 @@
                   : product.price
                 )
                   | number : "1.0-2"
-                  | currency
               }}
             </h4>
             @if(product.discountedPrice) {
             <span class="text-danger"
-              ><s>{{ product.price | number : "1.0-2" | currency }}</s></span
+              ><s>{{ product.price | number : "1.0-2" }}</s></span
             >
             }
           </div>

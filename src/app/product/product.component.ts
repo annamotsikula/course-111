@@ -15,8 +15,7 @@ export class ProductComponent {
 
   stars = new Array(5)
 
-  constructor(private _productService: ProductService, private _router: Router) {
-  }
+  constructor(private _productService: ProductService, private _router: Router) {}
 
   ngOnInit() {
     const { discountPercentage, price } = this.product

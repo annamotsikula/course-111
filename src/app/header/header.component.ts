@@ -12,9 +12,9 @@ export class HeaderComponent {
 
   cartProductNumber: number = 0;
 
-
   constructor(private _service: ProductService, private _router: Router) {
-    this._service.cartUpdated.subscribe((res) => {
+    this._service.addProductToWishlist$.subscribe((res) => {
+      console.log('Reponse arrived From Products Details', res)
       this.cartProductNumber = res
     })
   }
