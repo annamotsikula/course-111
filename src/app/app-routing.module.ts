@@ -8,6 +8,14 @@ import { RegisterFormComponent } from './register-form/register-form.component';
 const routes: Routes = [
   {
     path: '',
+    loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule)
+  },
+  {
+    path: 'auth',
+    redirectTo: "",
+  },
+  {
+    path: 'home',
     component: MainComponent,
     children: [
       {
