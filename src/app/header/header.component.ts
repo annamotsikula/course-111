@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ProductService } from '../core/services/product.service';
 import { Router } from '@angular/router';
+import { authToken } from '../core/constants/constants';
 
 @Component({
   selector: 'app-header',
@@ -21,5 +22,10 @@ export class HeaderComponent {
 
   redirect() {
     this._router.navigate(['/wishlist'])
+  }
+  signOut() {
+    const isToken = localStorage.getItem(authToken);
+    isToken && localStorage.removeItem(authToken);
+    this._router.navigate(['/']);
   }
 }

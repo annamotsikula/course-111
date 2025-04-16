@@ -32,7 +32,7 @@ export class ProductComponent {
   }
 
   gotoDetails() {
-    this._router.navigate(['/product-dashboard', this.product.id])
+    this._router.navigate(['/home/product-dashboard', this.product.id])
 
   }
 

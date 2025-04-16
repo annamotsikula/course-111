@@ -1,16 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Category, Product } from '../core/interfaces/product.interface';
 import { ProductService } from '../core/services/product.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-dashboard',
   templateUrl: './product-dashboard.component.html',
   styleUrl: './product-dashboard.component.scss',
 })
-export class ProductDashboardComponent implements OnInit {
-  service = inject(ProductService);
+export class ProductDashboardComponent {
+  private service = inject(ProductService);
 
-  productList: Product[] = [];
+  productList$: Observable<Product[]>
   toggleForm: boolean = false;
 
   inputData = {
@@ -41,17 +42,15 @@ export class ProductDashboardComponent implements OnInit {
       category: "groceries"
     }
   ]
-
-  ngOnInit() {
-    this.service.fetchAllproduct().subscribe(response => this.productList = response)
+  constructor() {
+    this.productList$ = this.service.fetchAllproduct();
     
-
-
-
   }
+
 
   deleteProductgById(product: Product) {
     console.log('Click detected', product)
+    // Old Service (before HTTP)
     this.service.removeProduct(product.id)
   }
 

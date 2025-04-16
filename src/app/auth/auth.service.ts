@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { API_URL } from '../core/constants/constants';
+import { API_URL, authToken } from '../core/constants/constants';
 import { catchError, mergeMap, of, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -28,12 +28,14 @@ export class AuthService {
   signIn(reponseBody: { email: string, password: string, expiresInMins?: number }) {
     const { email, password, expiresInMins } = reponseBody
     return this._http.post<AuthUser>(`${API_URL}/auth/login`, { username: email, password, expiresInMins: expiresInMins || 60 }).pipe(
+      tap(result => {
+        localStorage.setItem(authToken, result.accessToken)
+      }),
       mergeMap((result) => {
         console.log('Please navigate to Home page')
         return this._router.navigate(['/home'])
       }),
-      catchError((err) => of(err)),
-      tap(result => { console.log('TAP OPERATOR ENTERED', result) }),
+      // catchError((err) => of(err)),
     )
   }
 }

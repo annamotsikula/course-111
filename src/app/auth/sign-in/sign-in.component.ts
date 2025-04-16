@@ -1,6 +1,7 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { LoadingService } from '../../core/services/loading.service';
 
 
 type AuthForm = { email: FormControl<string>, password: FormControl<string>, rememberUser?: FormControl<boolean | null> }
@@ -17,6 +18,10 @@ export class SignInComponent implements OnDestroy {
   authService = inject(AuthService);
   authForm: FormGroup<AuthForm>;
 
+  loadingService = inject(LoadingService);
+
+  isLoading: boolean = false
+
   constructor() {
     this.authForm = this.formBuilderService.group<AuthForm>({
       email: this.formBuilderService.nonNullable.control("emilys", [Validators.required]),
@@ -24,7 +29,11 @@ export class SignInComponent implements OnDestroy {
       rememberUser: this.formBuilderService.control(false)
     });
 
-    console.log('Constructor created')
+    console.log('Constructor created');
+
+
+    // this.loadingService.loading$.subscribe(state =>this.isLoading = state);
+    
   }
 
 

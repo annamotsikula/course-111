@@ -9,7 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MainComponent } from './main/main.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor, AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -27,9 +28,15 @@ import { provideHttpClient } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
-    provideHttpClient()
+    // provideHttpClient(
+    //   withInterceptors([authInterceptor]),
+    // )
+  
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+
   ],
   bootstrap: [AppComponent]
 })
