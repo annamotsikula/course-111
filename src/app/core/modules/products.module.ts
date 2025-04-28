@@ -7,6 +7,7 @@ import { TruncatePipe } from '../pipes/truncate.pipe';
 import { ProductDetailsComponent } from '../../product-details/product-details.component';
 import { FormsModule } from '@angular/forms';
 import { ProductRoutingModule } from './product-routing.module';
+import { API_URL } from '../constants/constants';
 
 
 
@@ -23,5 +24,8 @@ import { ProductRoutingModule } from './product-routing.module';
     FormsModule,
     ProductRoutingModule
   ],
+  providers: [
+    { provide: API_URL, useValue: "https://fakejson.com" }
+  ]
 })
 export class ProductsModule { }

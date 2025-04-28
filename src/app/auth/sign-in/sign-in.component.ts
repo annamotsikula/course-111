@@ -2,6 +2,7 @@ import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { LoadingService } from '../../core/services/loading.service';
+import { AlertService } from '../../core/services/alert.service';
 
 
 type AuthForm = { email: FormControl<string>, password: FormControl<string>, rememberUser?: FormControl<boolean | null> }
@@ -19,6 +20,7 @@ export class SignInComponent implements OnDestroy {
   authForm: FormGroup<AuthForm>;
 
   loadingService = inject(LoadingService);
+  alertService = inject(AlertService)
 
   isLoading: boolean = false
 
@@ -33,28 +35,22 @@ export class SignInComponent implements OnDestroy {
 
 
     // this.loadingService.loading$.subscribe(state =>this.isLoading = state);
-    
+
   }
 
 
   onSubmit() {
     console.log(this.authForm)
     if (this.authForm.valid) {
-      const { email, password } = this.authForm.value
+      const { email, password, rememberUser } = this.authForm.value
       if (email && password) {
-        this.authService.signIn({ email, password })  
-        .subscribe(result => {
-          
-          // console.log(result)
-        }
-        //   {
-        //   next: (result) => {console.log(result)},
-        //   error: (err) => console.log('Error Occured while signing the user, ' , err),
-        //   complete: () => console.log('Request Completed!')
-        // }
-      )
+        this.authService.signIn({ email, password })
+          .subscribe(() => {
+            localStorage.setItem('rememberUser', JSON.stringify(rememberUser))
+          })
       }
     } else {
+      this.alertService.fail('You must fill all mandatory fields')
       console.log('IVNALID')
     }
 

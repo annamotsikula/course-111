@@ -1,0 +1,16 @@
+<div class="wrapper">
+  @for (alert of alerts ; track $index) {
+    <div
+      class="alert"
+      role="alert"
+      [ngClass]="{
+            'alert-success': alert.type === 0,
+            'alert-danger': alert.type === 1,
+            'alert-warning': alert.type === 2,
+          }"
+    >
+      {{ alert.message }}
+    </div>
+    }
+
+</div>

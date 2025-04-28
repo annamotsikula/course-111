@@ -11,6 +11,9 @@ import { MainComponent } from './main/main.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor, AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { errorInterceptorFunc } from './core/interceptors/error.interceptor';
+import { SharedComponentsModule } from './core/components/components.module';
+import { API_URL } from './core/constants/constants';
 
 
 @NgModule({
@@ -28,14 +31,14 @@ import { authInterceptor, AuthInterceptor } from './core/interceptors/auth.inter
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
+    SharedComponentsModule
+    // HttpClientModule
   ],
   providers: [
-    // provideHttpClient(
-    //   withInterceptors([authInterceptor]),
-    // )
-  
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    { provide: API_URL, useValue: "https://dummyjson.com" },
+    provideHttpClient(
+      withInterceptors([authInterceptor, errorInterceptorFunc]),
+    ),
 
   ],
   bootstrap: [AppComponent]

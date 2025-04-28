@@ -4,11 +4,13 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { MainComponent } from './main/main.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { authGuard, RedirectAuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule)
+    loadChildren: () => import("./auth/auth.module").then(m => m.AuthModule),
+    canActivate: [RedirectAuthGuard]
   },
   {
     path: 'auth',
@@ -17,6 +19,7 @@ const routes: Routes = [
   {
     path: 'home',
     component: MainComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'register',

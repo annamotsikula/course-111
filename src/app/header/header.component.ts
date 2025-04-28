@@ -21,11 +21,12 @@ export class HeaderComponent {
   }
 
   redirect() {
-    this._router.navigate(['/wishlist'])
+    this._router.navigate(['/home/wishlist'])
   }
   signOut() {
     const isToken = localStorage.getItem(authToken);
     isToken && localStorage.removeItem(authToken);
+    localStorage.clear();
     this._router.navigate(['/']);
   }
 }

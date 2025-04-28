@@ -1,0 +1,21 @@
+.wrapper {
+    position: absolute;
+    z-index: 1031;
+    right: 20px;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: all .3s linear;
+
+    .alert {
+        min-width: 200px;
+        text-align: center;
+
+        &:not(:first) {
+            margin-top: 10px;
+        }
+    }
+
+
+
+}

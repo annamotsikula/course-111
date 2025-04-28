@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Category, Product } from '../interfaces/product.interface';
 import { BehaviorSubject, map, Subject, tap } from 'rxjs';
 import { productList } from './product-list';
@@ -20,11 +20,11 @@ export class ProductService {
 
   cartUpdated = new Subject<number>();
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient, @Inject(API_URL) private _url: string) { }
 
 
   fetchAllproduct() {
-    return this._http.get<FetchProduct>(`${API_URL}/products`).pipe(
+    return this._http.get<FetchProduct>(`${this._url}/products`).pipe(
       map(response => response.products),
       map(productList =>
         productList.map(
@@ -61,7 +61,7 @@ export class ProductService {
   }
 
   getSingleProduct(id: number) {
-    return this._http.get<Product>(`${API_URL}/products/${id}`)
+    return this._http.get<Product>(`${this._url}/products/${id}`)
   }
 
   removeProduct(id: number) {
